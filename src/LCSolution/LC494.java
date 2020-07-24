@@ -36,22 +36,89 @@ sum(P) + sum(N) + sum(P) - sum(N) = target + sum(P) + sum(N)
          */
 
         // 0-1背包问题
+//        public int findTargetSumWays(int[] nums, int S) {
+//            int sum = 0;
+//            for (int num:nums)
+//                sum+=num;
+//            if (sum<S || (sum+S)%2 == 1)
+//                return 0;
+//
+//            int w = (S + sum)>>1;
+//            int[] dp = new int[w+1];
+//            dp[0] = 1;  // 和为0 的取法
+//            for (int num:nums){
+//                for (int j=w;j>=num;j--)
+//                    dp[j] = dp[j]+dp[j-num];
+//            }
+//            return dp[w];
+//        }
+
+//        int count = 0;
+//
+//        public int findTargetSumWays(int[] nums, int S) {
+//            backtrack(nums, 0, S);
+//            return count;
+//        }
+//
+//        private void backtrack(int[] nums,int index,int S){
+//            if (index == nums.length){
+//                if (S == 0)
+//                    count++;
+//                return;
+//            }
+//
+//            S +=nums[index];
+//            backtrack(nums, index+1, S);
+//            S -=nums[index];
+//            S -=nums[index];
+//            backtrack(nums, index+1, S);
+//            S +=nums[index];
+//        }
+
+
+        //通过备忘录剪枝
+//        public int findTargetSumWays(int[] nums, int S) {
+//            return dp(nums, new HashMap<>(), 0, S);
+//        }
+//
+//        private int dp(int[] nums,Map<String,Integer> map,int index,int S){
+//            if (index == nums.length){
+//                if (S == 0)
+//                    return 1;
+//                return 0;
+//            }
+//
+//            String key = index +","+S;
+//            if (map.containsKey(key))
+//                return map.get(key);
+//
+//            int res = dp(nums, map, index+1, S-nums[index])+
+//                    dp(nums, map, index+1, S+nums[index]);
+//
+//            map.put(key, res);
+//            return res;
+//        }
+
         public int findTargetSumWays(int[] nums, int S) {
             int sum = 0;
             for (int num:nums)
-                sum+=num;
-            if (sum<S || (sum+S)%2 == 1)
+                sum += num;
+
+            if (sum < S || (sum+S)%2 == 1)
                 return 0;
 
-            int w = (S + sum)>>1;
-            int[] dp = new int[w+1];
-            dp[0] = 1;  // 和为0 的取法
-            for (int num:nums){
-                for (int j=w;j>=num;j--)
-                    dp[j] = dp[j]+dp[j-num];
-            }
-            return dp[w];
-        }
+            int target = (sum+S)>>1;
 
+            int[] dp = new int[target+1];
+            // 和为0 的种类
+            dp[0] = 1;
+
+            for (int i = 0; i < nums.length; i++) {
+                for (int j = target; j >=nums[i] ; j--) {
+                    dp[j] +=dp[j-nums[i]];
+                }
+            }
+            return dp[target];
+        }
     }
 }
