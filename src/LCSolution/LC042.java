@@ -140,19 +140,45 @@ public class LC042 {
 
 
         //栈,单调递减栈
+//        public int trap(int[] height) {
+//            int res = 0;
+//            Stack<Integer> stack = new Stack<>();
+//            for (int i=0;i<height.length;i++){
+//                while (!stack.isEmpty() && height[i]>height[stack.peek()]){
+//                    int curH = height[stack.pop()];
+//                    if (!stack.isEmpty()) {
+//                        int indexL = stack.peek();
+//                        int minH = Math.min(height[indexL], height[i]);
+//                        res += (minH - curH) * (i - indexL - 1);
+//                    }
+//                }
+//                stack.push(i);
+//            }
+//            return res;
+//        }
+
+
         public int trap(int[] height) {
+            if (height == null || height.length<3)
+                return 0;
+            int l = 1;
+            int r = height.length-2;
+            int lmax_h = height[l-1];
+            int rmax_h = height[r+1];
             int res = 0;
-            Stack<Integer> stack = new Stack<>();
-            for (int i=0;i<height.length;i++){
-                while (!stack.isEmpty() && height[i]>height[stack.peek()]){
-                    int curH = height[stack.pop()];
-                    if (!stack.isEmpty()) {
-                        int indexL = stack.peek();
-                        int minH = Math.min(height[indexL], height[i]);
-                        res += (minH - curH) * (i - indexL - 1);
-                    }
-                }
-                stack.push(i);
+            while (l<=r){
+                lmax_h = Math.max(lmax_h, height[l]);
+                rmax_h = Math.max(rmax_h, height[r]);
+                 if (lmax_h<rmax_h){
+                     if (lmax_h>height[l])
+                         res += lmax_h-height[l];
+                     l++;
+                 }
+                 else {
+                     if (rmax_h>height[r])
+                         res += rmax_h-height[r];
+                     r--;
+                 }
             }
             return res;
         }
