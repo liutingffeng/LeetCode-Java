@@ -1,5 +1,7 @@
 package LCSolution;
 
+import com.sun.org.apache.bcel.internal.generic.FSUB;
+
 import java.util.*;
 
 public class LC187 {
@@ -59,5 +61,42 @@ public class LC187 {
             }
             return res;
         }
+
+
+//        public List<String> findRepeatedDnaSequences(String s){
+//            List<String> res = new ArrayList<>();
+//            if (s.length()<10)
+//                return res;
+//
+//            Map<Character,Integer> map = new HashMap<>();
+//            map.put('A', 0);
+//            map.put('C', 1);
+//            map.put('T', 2);
+//            map.put('G', 3);
+//
+//            int[] bitmap = new int[1<<20];
+//            int val = 0;
+//            // 初始化
+//            for (int i = 0; i < 10; i++) {
+//                val = (val<<2)|map.get(s.charAt(i));
+//            }
+//            bitmap[val] = 1;
+//            int mask = (1<<20)-1;
+//            int i=1 ,j=10;
+//            while (j< s.length()){
+//                val = ((val<<2)&mask) | map.get(s.charAt(j));
+//
+//                if (bitmap[val]==1){
+//                    res.add(s.substring(i, j+1));
+//                    bitmap[val]++;
+//                }
+//                else if (bitmap[val] == 0)
+//                    bitmap[val] = 1;
+//
+//                i++;
+//                j++;
+//            }
+//            return res;
+//        }
     }
 }

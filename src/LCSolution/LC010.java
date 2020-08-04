@@ -82,6 +82,7 @@ public class LC010 {
             for (int i = 0; i <=m; i++) {
                 for (int j = 1; j <=n ; j++) {
                     if (pc[j-1] == '*'){
+                        // dp[i-1][j] 选择匹配多次
                         dp[i][j] = (i>0 && (sc[i-1] == pc[j-2] || pc[j-2] == '.') && dp[i-1][j])
                                 || dp[i][j-2];
                     }

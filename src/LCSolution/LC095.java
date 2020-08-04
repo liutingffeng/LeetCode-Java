@@ -1,33 +1,59 @@
 package LCSolution;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LC095 {
 
-    class Solution {
-//        public int numTrees(int n) {
-//            if (n==1 || n==0)
-//                return 1;
-//
-//            int res = 0;
-//            for (int i=1;i<=n;i++){
-//                res += numTrees(i-1)*numTrees(n-i);
-//            }
-//            return res;
-//        }
+    class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
 
-        public int numTrees(int n) {
-            int[] memo = new int[n+1];
-            memo[0] = 1;
-            memo[1] = 1;
-            for (int i=2;i<=n;i++)
-                for (int j=1;j<=i;j++){
-                    memo[i] += memo[j-1]*memo[i-j];
-                }
-            return memo[n];
+    class Solution {
+
+
+        public List<TreeNode> generateTrees(int n) {
+            if (n == 0)
+                return new ArrayList<>();
+            return recusion(1, n);
         }
 
+        private List<TreeNode> recusion(int l,int r){
+            List<TreeNode> res = new ArrayList<>();
+            if (l>r) {
+                res.add(null);
+                return res;
+            }
+            if (l==r) {
+                res.add(new TreeNode(l));
+                return res;
+            }
 
+
+            for (int i = l; i <=r ; i++) {
+                TreeNode cur ;
+                List<TreeNode> leftcol = recusion(l,i-1);
+                List<TreeNode> rightcol = recusion(i+1, r);
+                for (TreeNode left : leftcol)
+                    for (TreeNode right : rightcol){
+                        cur = new TreeNode(i);
+                        cur.left = left;
+                        cur.right = right;
+                        res.add(cur);
+                    }
+            }
+            return res;
+        }
     }
 }

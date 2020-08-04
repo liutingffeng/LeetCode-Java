@@ -5,6 +5,11 @@ import java.util.Map;
 
 public class LC174 {
 
+    /*
+         dp  7  5  2
+             6  11 5
+             1  1  6
+     */
     class Solution {
         public int calculateMinimumHP(int[][] dungeon) {
             int m = dungeon.length;

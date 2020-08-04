@@ -1,5 +1,7 @@
 package LCSolution;
 
+import com.sun.org.apache.xerces.internal.impl.msg.XMLMessageFormatter_ja;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -35,5 +37,28 @@ public class LC128 {
             return longSec;
 
         }
+
+//        public int longestConsecutive(int[] nums) {
+//            if (nums == null || nums.length == 0)
+//                return 0;
+//            Set<Integer> set = new HashSet<>();
+//            for (int num:nums)
+//                set.add(num);
+//
+//            int longest = 1;
+//            int curlong = 1;
+//            for (int num : nums){
+//                curlong = 1;
+//                if (!set.contains(num-1)) {
+//                    while (set.contains(num+1)) {
+//                        num += 1;
+//                        curlong++;
+//                    }
+//                }
+//
+//                longest = Math.max(curlong, longest);
+//            }
+//            return longest;
+//        }
     }
 }

@@ -36,5 +36,53 @@ public class LC394 {
             }
             return res.toString();
         }
+
+        // "3[a2[c]]"
+//        public String decodeString(String s) {
+//
+//            char[] charArray = s.toCharArray();
+//            Deque<String> stack = new ArrayDeque<>();
+//            Deque<String> helper = new ArrayDeque<>();
+//
+//            for (int i = 0; i < charArray.length; ) {
+//                if (charArray[i] == ']'){
+//                    // 开始处理
+//                    StringBuilder temp = new StringBuilder();
+//                    while (!stack.peekLast().equals("[")){
+//                        helper.addLast(stack.pollLast());
+//                    }
+//                    while (!helper.isEmpty()){
+//                        temp.append(helper.pollLast());
+//                    }
+//                    stack.pollLast();
+//                    int num = Integer.parseInt(stack.pollLast());
+//                    String cur  = temp.toString();
+//                    StringBuilder newStr = new StringBuilder();
+//                    while (num -- > 0){
+//                        newStr.append(cur);
+//                    }
+//                    stack.addLast(newStr.toString());
+//
+//                    i++;
+//                }
+//                else if (charArray[i]>='0' && charArray[i]<='9'){
+//                    int num = 0;
+//                    while (charArray[i]>='0' && charArray[i]<='9'){
+//                        num = num*10 + charArray[i]-'0';
+//                        i++;
+//                    }
+//                    stack.addLast(String.valueOf(num));
+//                }
+//                else {
+//                    stack.addLast(String.valueOf(charArray[i]));
+//                    i++;
+//                }
+//            }
+//            StringBuilder res = new StringBuilder();
+//            while (!stack.isEmpty()){
+//                res.append(stack.pollFirst());
+//            }
+//            return res.toString();
+//        }
     }
 }

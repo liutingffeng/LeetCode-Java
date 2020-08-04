@@ -22,7 +22,7 @@ public class LC005 {
 //            return res;
 //        }
 
-        // 通过双指针法
+        // 通过双指针法，中心扩散法
         public String longestPalindrome(String s) {
 
             String res = "";

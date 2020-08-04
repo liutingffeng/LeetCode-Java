@@ -45,17 +45,44 @@ public class LC169 {
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
          */
+//        public int majorityElement(int[] nums) {
+//            int candidate = nums[0];
+//            int count = 1;
+//            for (int i=1;i<nums.length;i++){
+//                count = candidate == nums[i]? count+1:count-1;
+//                if (count == 0){
+//                    candidate = nums[i];
+//                    count = 1;
+//                }
+//            }
+//            return candidate;
+//        }
+
         public int majorityElement(int[] nums) {
-            int candidate = nums[0];
-            int count = 1;
-            for (int i=1;i<nums.length;i++){
-                count = candidate == nums[i]? count+1:count-1;
-                if (count == 0){
-                    candidate = nums[i];
-                    count = 1;
-                }
+            return mergeSort(nums, 0, nums.length-1);
+        }
+
+        private int mergeSort(int[] nums, int l, int r){
+            if (l>=r)
+                return nums[l];
+
+            int mid = l+(r-l)/2;
+            int major1 = mergeSort(nums, l, mid);
+            int major2 = mergeSort(nums, mid+1, r);
+            if (major1 == major2)
+                return major1;
+            //
+            int majorcount = (r-l+1)/2;
+            int count1 = 0;
+            int count2 = 0;
+            for (int i = l; i <=r ; i++) {
+                if (major1 == nums[i])
+                    count1++;
+                if (major2 == nums[i])
+                    count2++;
             }
-            return candidate;
+
+            return count1>count2 ? major1:major2;
         }
     }
 }

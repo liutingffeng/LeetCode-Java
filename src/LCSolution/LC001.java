@@ -1,6 +1,8 @@
 package LCSolution;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 public class LC001 {
@@ -20,4 +22,5 @@ public class LC001 {
             return new int[]{-1,-1};
         }
     }
+
 }
