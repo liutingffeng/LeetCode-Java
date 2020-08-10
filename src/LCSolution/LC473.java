@@ -19,6 +19,7 @@ public class LC473 {
             if ((sum % 4) !=0)
                 return false;
 
+            // 排序
             List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
             Collections.sort(list,Collections.reverseOrder());
             for (int i = 0; i < nums.length; i++) {
