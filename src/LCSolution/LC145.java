@@ -1,6 +1,5 @@
 package LCSolution;
 
-import com.sun.java.swing.plaf.windows.WindowsTextAreaUI;
 
 import java.util.*;
 

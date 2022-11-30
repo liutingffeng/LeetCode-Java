@@ -1,7 +1,6 @@
 package sync.threadPool2;
 
 import org.junit.Test;
-import org.omg.CORBA.TIMEOUT;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

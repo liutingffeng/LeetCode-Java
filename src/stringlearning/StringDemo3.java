@@ -1,7 +1,6 @@
 package stringlearning;
 
 import org.junit.Test;
-import org.omg.CORBA.OBJECT_NOT_EXIST;
 
 import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;
