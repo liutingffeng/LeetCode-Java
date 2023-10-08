@@ -40,6 +40,7 @@ public class LC261 {
         int[] foot = new int[n];
         TreeNode root = nodes[0];
 
+        return true;
 
     }
 
