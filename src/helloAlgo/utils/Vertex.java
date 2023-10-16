@@ -1,0 +1,34 @@
+package helloAlgo.utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @Author liutingfeng
+ * @Date 2023/9/23 13:42
+ */
+public class Vertex {
+    public int val;
+
+    public Vertex(int val) {
+        this.val = val;
+    }
+
+    /* 输入值列表 vals ，返回顶点列表 vets */
+    public static Vertex[] valsToVets(int[] vals) {
+        Vertex[] vets = new Vertex[vals.length];
+        for (int i = 0; i < vals.length; i++) {
+            vets[i] = new Vertex(vals[i]);
+        }
+        return vets;
+    }
+
+    /* 输入顶点列表 vets ，返回值列表 vals */
+    public static List<Integer> vetsToVals(List<Vertex> vets) {
+        List<Integer> vals = new ArrayList<>();
+        for (Vertex vet : vets) {
+            vals.add(vet.val);
+        }
+        return vals;
+    }
+}
