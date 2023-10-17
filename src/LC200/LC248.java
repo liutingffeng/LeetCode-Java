@@ -1,6 +1,8 @@
 package LC200;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -71,7 +73,7 @@ public class LC248 {
     public List<String> findStrobogrammatic(int n) {
         List<String> res = new ArrayList<>();
         if (n == 1) {
-            return List.of(new String[] {"0","1","8"});
+            return Arrays.asList(new String[] {"0","1","8"});
         }
         char[] data = new char[n];
         dfs(0, n - 1, res, data);
