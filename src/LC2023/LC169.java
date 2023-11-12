@@ -3,8 +3,11 @@ package LC2023;
 public class LC169 {
     public int majorityElement(int[] nums) {
         int res = 0;
+        int votes = 0;
         for (int num : nums) {
-            res = res ^ num;
+            if (votes == 0)
+                res = num;
+            votes += num == res ? 1 : -1;
         }
         return res;
     }
