@@ -2268,3 +2268,92 @@ public int longestCommonSubsequence(String text1, String text2) {
 ---
 
 > 共 100 题，按题号从小到大排列。
+
+---
+
+## 附加题
+
+### 矩形相交 — 几何计算
+
+**题目描述**：
+
+在 iOS/macOS 等系统中，屏幕由层层嵌套的视图组成。每个视图有一个 `frame` 属性，类型为 `Rect`：
+
+```
+// 原点在矩形左下角，边与坐标轴平行，使用笛卡尔坐标系
+struct Rect {
+    var x: Double      // 原点 x 坐标
+    var y: Double      // 原点 y 坐标
+    var width: Double
+    var height: Double
+}
+```
+
+需要实现两个函数：
+1. `hasIntersection(frame1, frame2)` — 判断两个矩形是否相交
+2. `calculateIntersectionAreaSize(frames)` — 计算多个矩形公共交集的面积
+
+**考察知识点**：几何、矩形相交判断、区间重叠
+
+**解题思路**：
+
+**hasIntersection**：利用分离轴定理，两矩形不相交的充要条件是满足以下任意一条：
+- frame1 在 frame2 右侧：`frame1.x >= frame2.x + frame2.width`
+- frame1 在 frame2 左侧：`frame1.x + frame1.width <= frame2.x`
+- frame1 在 frame2 上方：`frame1.y >= frame2.y + frame2.height`
+- frame1 在 frame2 下方：`frame1.y + frame1.height <= frame2.y`
+
+取反即为相交条件。
+
+**calculateIntersectionAreaSize**：逐步求交，先求前两个矩形的交集矩形，再用交集矩形与下一个矩形求交，以此类推。两矩形交集的计算方式：
+```
+交集左边界 = max(x1, x2)
+交集右边界 = min(x1+w1, x2+w2)
+交集下边界 = max(y1, y2)
+交集上边界 = min(y1+h1, y2+h2)
+若右边界 <= 左边界 或 上边界 <= 下边界，则无交集
+```
+
+```java
+public class RectIntersection {
+
+    static class Rect {
+        double x, y, width, height;
+        Rect(double x, double y, double width, double height) {
+            this.x = x; this.y = y; this.width = width; this.height = height;
+        }
+    }
+
+    // 判断两个矩形是否相交，O(1)
+    public static boolean hasIntersection(Rect frame1, Rect frame2) {
+        if (frame1.x >= frame2.x + frame2.width)  return false; // frame1 在右
+        if (frame1.x + frame1.width <= frame2.x)  return false; // frame1 在左
+        if (frame1.y >= frame2.y + frame2.height) return false; // frame1 在上
+        if (frame1.y + frame1.height <= frame2.y) return false; // frame1 在下
+        return true;
+    }
+
+    // 求两矩形的交集矩形，无交集返回 null
+    private static Rect intersect(Rect r1, Rect r2) {
+        double x    = Math.max(r1.x, r2.x);
+        double y    = Math.max(r1.y, r2.y);
+        double maxX = Math.min(r1.x + r1.width,  r2.x + r2.width);
+        double maxY = Math.min(r1.y + r1.height, r2.y + r2.height);
+        if (maxX <= x || maxY <= y) return null;
+        return new Rect(x, y, maxX - x, maxY - y);
+    }
+
+    // 计算多个矩形公共交集的面积，O(n)
+    public static double calculateIntersectionAreaSize(Rect[] frames) {
+        if (frames == null || frames.length == 0) return 0;
+        Rect current = frames[0];
+        for (int i = 1; i < frames.length; i++) {
+            current = intersect(current, frames[i]);
+            if (current == null) return 0;
+        }
+        return current.width * current.height;
+    }
+}
+```
+
+**复杂度**：`hasIntersection` O(1)；`calculateIntersectionAreaSize` 时间 O(n)、空间 O(1)。
